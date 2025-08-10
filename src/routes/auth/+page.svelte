@@ -22,8 +22,8 @@
           Выписать 50 новых слов в English Assistant
         </p>
       </div>
-      <div slot="detailes" style:padding-right="47.5px">
-        <p>
+      <div slot="detailes" style:padding-right="54px">
+        <p style:text-indent="19px">
           Среди них должны быть как специализированные термины, так и
           разговорные слова.
         </p>
@@ -136,6 +136,7 @@
     justify-content: center;
     width: 100%;
     max-width: 525px;
+    line-height: 1.5;
   }
 
   .toggle-content-cards {
