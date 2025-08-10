@@ -1,30 +1,49 @@
 <script>
-  import { ToggleContentCard, IconHover } from "svelte-elegant";
-  import { Delete } from "svelte-elegant/icons-elegant";
+  import { ToggleContentCard, IconHover, Button } from "svelte-elegant";
+  import { Delete, Pen, Plus } from "svelte-elegant/icons-elegant";
+
+  import { themeStore } from "svelte-elegant/stores/ElementIdStore";
+
+  let theme;
+
+  themeStore.subscribe((value) => {
+    theme = value;
+  });
 </script>
 
 <div class="toggle-content-cards">
   <div class="card">
     <ToggleContentCard width="100%">
       <div slot="content">
-        <p>Выписать 50 новых слов в English Assistant</p>
-      </div>
-      <div
-        slot="detailes"
-        style:padding-right="47.5px"
-        style:padding-bottom="0.5rem"
-      >
-        <p>
-          It contains the details. It contains the details. It contains the
-          details.
+        <p
+          style:color={theme?.palette.text.neutral}
+          style:transition="color 0.3s"
+        >
+          Выписать 50 новых слов в English Assistant
         </p>
-        <ul style:margin-top="0.25rem">
-          <li>Detail 1</li>
-          <li>Detail 2</li>
-          <li>Detail 3</li>
-        </ul>
       </div>
-
+      <div slot="detailes" style:padding-right="47.5px">
+        <p>
+          Среди них должны быть как специализированные термины, так и
+          разговорные слова.
+        </p>
+        <div
+          style:display="flex"
+          style:aligh-items="center"
+          style:justify-content="center"
+        >
+          <Button
+            variant="Outlined"
+            width="100%"
+            marginTop="0.45rem"
+            marginBottom="0.66rem"
+            maxWidth="310px"
+          >
+            <Pen size="1.25rem" />
+            <span style:margin-left="0.25rem">Modify Task</span>
+          </Button>
+        </div>
+      </div>
       <div slot="actions" style:margin-left="0.25rem">
         <IconHover padding="0.33rem">
           <Delete size="1.66rem" />
@@ -35,24 +54,35 @@
   <div class="card">
     <ToggleContentCard width="100%">
       <div slot="content">
-        <p>Выписать 50 новых слов в English Assistant</p>
-      </div>
-      <div
-        slot="detailes"
-        style:padding-right="47.5px"
-        style:padding-bottom="0.5rem"
-      >
-        <p>
-          It contains the details. It contains the details. It contains the
-          details.
+        <p
+          style:color={theme?.palette.text.neutral}
+          style:transition="color 0.3s"
+        >
+          Выписать 50 новых слов в English Assistant
         </p>
-        <ul style:margin-top="0.25rem">
-          <li>Detail 1</li>
-          <li>Detail 2</li>
-          <li>Detail 3</li>
-        </ul>
       </div>
-
+      <div slot="detailes" style:padding-right="47.5px">
+        <p>
+          Среди них должны быть как специализированные термины, так и
+          разговорные слова.
+        </p>
+        <div
+          style:display="flex"
+          style:aligh-items="center"
+          style:justify-content="center"
+        >
+          <Button
+            variant="Outlined"
+            width="100%"
+            marginTop="0.45rem"
+            marginBottom="0.66rem"
+            maxWidth="310px"
+          >
+            <Pen size="1.25rem" />
+            <span style:margin-left="0.25rem">Modify Task</span>
+          </Button>
+        </div>
+      </div>
       <div slot="actions" style:margin-left="0.25rem">
         <IconHover padding="0.33rem">
           <Delete size="1.66rem" />
@@ -63,24 +93,35 @@
   <div class="card">
     <ToggleContentCard width="100%">
       <div slot="content">
-        <p>Выписать 50 новых слов в English Assistant</p>
-      </div>
-      <div
-        slot="detailes"
-        style:padding-right="47.5px"
-        style:padding-bottom="0.5rem"
-      >
-        <p>
-          It contains the details. It contains the details. It contains the
-          details.
+        <p
+          style:color={theme?.palette.text.neutral}
+          style:transition="color 0.3s"
+        >
+          Выписать 50 новых слов в English Assistant
         </p>
-        <ul style:margin-top="0.25rem">
-          <li>Detail 1</li>
-          <li>Detail 2</li>
-          <li>Detail 3</li>
-        </ul>
       </div>
-
+      <div slot="detailes" style:padding-right="47.5px">
+        <p>
+          Среди них должны быть как специализированные термины, так и
+          разговорные слова.
+        </p>
+        <div
+          style:display="flex"
+          style:aligh-items="center"
+          style:justify-content="center"
+        >
+          <Button
+            variant="Outlined"
+            width="100%"
+            marginTop="0.45rem"
+            marginBottom="0.66rem"
+            maxWidth="310px"
+          >
+            <Pen size="1.25rem" />
+            <span style:margin-left="0.25rem">Modify Task</span>
+          </Button>
+        </div>
+      </div>
       <div slot="actions" style:margin-left="0.25rem">
         <IconHover padding="0.33rem">
           <Delete size="1.66rem" />
@@ -92,10 +133,9 @@
 
 <style>
   .card {
-    margin-bottom: 0.06rem;
     justify-content: center;
-
-    width: 525px;
+    width: 100%;
+    max-width: 525px;
   }
 
   .toggle-content-cards {
@@ -103,15 +143,10 @@
     align-items: center; /* Центрируем карточки по горизонтали */
     flex-direction: column;
     margin-bottom: 0.25rem;
+    padding-top: 0.58rem;
     padding-left: 0.66rem;
     padding-right: 0.18rem;
     box-sizing: border-box;
     width: 100vw;
-  }
-
-  @media (max-width: 550px) {
-    .card {
-      width: 100%;
-    }
   }
 </style>
