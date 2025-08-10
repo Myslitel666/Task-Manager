@@ -1,3 +1,7 @@
+## Шрифт и иконки
+
+Шрифт и иконки предоставляет библиотека Svelte Elegant https://github.com/Myslitel666/Svelte-Elegant (MIT)
+
 Assets:
 
 - 3D icons: Modified from Check Mark Button SVG Vector (https://www.svgrepo.com/svg/404946/check-mark-button) (MIT).
