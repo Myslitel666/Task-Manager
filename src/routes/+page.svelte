@@ -62,7 +62,7 @@
     style:display="flex"
     style:flex-direction="column"
     style:align-items="center"
-    style:height="calc(100dvh - 127.5px)"
+    style:max-height="calc(100dvh - 127.5px)"
     style:overflow="auto"
     style:box-sizing="border-box"
   >
@@ -80,49 +80,24 @@
 
           <div slot="detailes" style:padding-right="54px">
             <p style:text-indent="19px">{task.details}</p>
-            <div
-              style:display="flex"
-              style:aligh-items="center"
-              style:justify-content="center"
-            >
-              <Button
-                onclick={() => modifyTask(index)}
-                variant="Outlined"
-                width="100%"
-                marginTop="0.45rem"
-                marginBottom="0.66rem"
-                maxWidth="310px"
-              >
-                <Pen size="1.25rem" />
-                <span style:margin-left="0.25rem">Modify Task</span>
-              </Button>
-            </div>
           </div>
           <div
             slot="actions"
             style:margin-left="0.25rem"
             style:margin-right="0.25rem"
           >
+            <IconHover isPrimary padding="0.33rem">
+              <Pen size="1.44rem" />
+            </IconHover>
             <IconHover padding="0.33rem">
-              <Delete size="1.66rem" />
+              <Delete size="1.58rem" />
             </IconHover>
           </div>
         </ToggleContentCard>
       </div>
     {/each}
   </div>
-</div>
-
-<div
-  style:position="absolute"
-  style:width="100vw"
-  style:justify-content="center"
-  style:align-items="center"
-  style:display="flex"
-  style:bottom="0"
-  style:padding-bottom="8px"
->
-  <Button variant="Outlined" width="100%" maxWidth="310px">
+  <Button variant="Outlined" width="100%" maxWidth="525px">
     <Plus size="2.25rem" />
     <span style:margin-left="-0.25rem">Create Task</span>
   </Button>
@@ -135,16 +110,14 @@
     margin-bottom: 0.5rem;
   }
 
-  .card:last-child {
-    margin-bottom: 0;
-  }
-
   .toggle-content-cards {
+    align-items: center;
     justify-content: center;
+    flex-direction: column;
     display: flex;
     padding-top: 0.58rem;
     padding-left: 0.66rem;
-    padding-right: 0.18rem;
+    padding-right: 0.66rem;
     box-sizing: border-box;
     width: 100vw;
   }
