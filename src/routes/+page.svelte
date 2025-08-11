@@ -98,7 +98,11 @@
               </Button>
             </div>
           </div>
-          <div slot="actions" style:margin-left="0.25rem">
+          <div
+            slot="actions"
+            style:margin-left="0.25rem"
+            style:margin-right="0.25rem"
+          >
             <IconHover padding="0.33rem">
               <Delete size="1.66rem" />
             </IconHover>
@@ -119,8 +123,8 @@
   style:padding-bottom="8px"
 >
   <Button variant="Outlined" width="100%" maxWidth="310px">
-    <Pen size="1.25rem" />
-    <span style:margin-left="0.25rem">Modify Task</span>
+    <Plus size="2.25rem" />
+    <span style:margin-left="-0.25rem">Create Task</span>
   </Button>
 </div>
 
@@ -128,6 +132,11 @@
   .card {
     width: 100%;
     line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .card:last-child {
+    margin-bottom: 0;
   }
 
   .toggle-content-cards {
