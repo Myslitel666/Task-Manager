@@ -5,11 +5,16 @@
     Button,
     Modal,
     TextArea,
+    TextField,
   } from "svelte-elegant";
-  import { Delete, Pen, Plus } from "svelte-elegant/icons-elegant";
+  import { Delete, Pen, Plus, CheckMark } from "svelte-elegant/icons-elegant";
   import { themeStore } from "svelte-elegant/stores/ElementIdStore";
+  import CustomizeModal from "../components/CustomizeModal.svelte";
 
   let isOpenCreationModal = false;
+  let isOpenModifyModal = false;
+  let taskTitle = "";
+  let details = "";
   let theme;
   themeStore.subscribe((value) => {
     theme = value;
@@ -88,7 +93,15 @@
             style:margin-left="0.25rem"
             style:margin-right="0.25rem"
           >
-            <IconHover isPrimary padding="0.33rem">
+            <IconHover
+              onclick={() => {
+                isOpenModifyModal = true;
+                details = tasks[index].details;
+                taskTitle = tasks[index].title;
+              }}
+              isPrimary
+              padding="0.33rem"
+            >
               <Pen size="1.44rem" />
             </IconHover>
             <IconHover padding="0.33rem">
@@ -112,9 +125,19 @@
   </Button>
 </div>
 
-<Modal bind:isOpen={isOpenCreationModal} padding="8px">
-  <TextArea width="100%" label="Text Area" />
-</Modal>
+<CustomizeModal
+  bind:isOpen={isOpenCreationModal}
+  modalTitle="Creation Task"
+  buttonText="Create Task"
+/>
+<CustomizeModal
+  bind:isOpen={isOpenModifyModal}
+  bind:details
+  bind:taskTitle
+  modalTitle="Modification Task"
+  buttonText="Save Task"
+  isModify
+/>
 
 <style>
   .card {
