@@ -3,11 +3,13 @@
     ToggleContentCard,
     IconHover,
     Button,
-    ScrollbarContainer,
+    Modal,
+    TextArea,
   } from "svelte-elegant";
   import { Delete, Pen, Plus } from "svelte-elegant/icons-elegant";
   import { themeStore } from "svelte-elegant/stores/ElementIdStore";
 
+  let isOpenCreationModal = false;
   let theme;
   themeStore.subscribe((value) => {
     theme = value;
@@ -20,7 +22,7 @@
         "Среди них должны быть как специализированные термины, так и разговорные слова.",
     },
     {
-      title: "Повторить слова перед собеседованием",
+      title: "Повторить Theory перед собеседованием",
       details: "Сделать упор на технические термины и устойчивые выражения.",
     },
     {
@@ -33,7 +35,7 @@
         "Среди них должны быть как специализированные термины, так и разговорные слова.",
     },
     {
-      title: "Повторить слова перед собеседованием",
+      title: "Повторить Theory перед собеседованием",
       details: "Сделать упор на технические термины и устойчивые выражения.",
     },
     {
@@ -97,11 +99,22 @@
       </div>
     {/each}
   </div>
-  <Button variant="Outlined" width="100%" maxWidth="525px">
+  <Button
+    variant="Outlined"
+    width="100%"
+    maxWidth="525px"
+    onclick={() => {
+      isOpenCreationModal = true;
+    }}
+  >
     <Plus size="2.25rem" />
     <span style:margin-left="-0.25rem">Create Task</span>
   </Button>
 </div>
+
+<Modal bind:isOpen={isOpenCreationModal} padding="8px">
+  <TextArea width="100%" label="Text Area" />
+</Modal>
 
 <style>
   .card {
