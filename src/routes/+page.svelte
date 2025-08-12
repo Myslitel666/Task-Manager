@@ -3,57 +3,16 @@
   import { Delete, Pen, Plus, CheckMark } from "svelte-elegant/icons-elegant";
   import { themeStore } from "svelte-elegant/stores/ElementIdStore";
   import CustomizeModal from "../components/CustomizeModal.svelte";
+  import { tasks, taskTitle, details } from "../stores/tasksStore";
 
   let isOpenCreationModal = false;
   let isOpenDeletionModal = false;
   let isOpenModifyModal = false;
-  let taskTitle = "";
-  let details = "";
+  let modifyTaskIndex = -1;
   let theme;
   themeStore.subscribe((value) => {
     theme = value;
   });
-
-  let tasks = [
-    {
-      title: "Выписать 50 новых слов в English Assistant",
-      details:
-        "Среди них должны быть как специализированные термины, так и разговорные слова.",
-    },
-    {
-      title: "Повторить Theory перед собеседованием",
-      details: "Сделать упор на технические термины и устойчивые выражения.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
-    {
-      title: "Выписать 50 новых слов в English Assistant",
-      details:
-        "Среди них должны быть как специализированные термины, так и разговорные слова.",
-    },
-    {
-      title: "Повторить Theory перед собеседованием",
-      details: "Сделать упор на технические термины и устойчивые выражения.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
-  ];
-
-  function modifyTask(index) {
-    console.log("Modify clicked, index:", index);
-  }
 </script>
 
 <div class="toggle-content-cards">
@@ -67,7 +26,7 @@
     style:overflow="auto"
     style:box-sizing="border-box"
   >
-    {#each tasks as task, index}
+    {#each $tasks as task, index}
       <div class="card">
         <ToggleContentCard width="100%">
           <div slot="content">
@@ -90,8 +49,9 @@
             <IconHover
               onclick={() => {
                 isOpenModifyModal = true;
-                details = tasks[index].details;
-                taskTitle = tasks[index].title;
+                $details = $tasks[index].details;
+                $taskTitle = $tasks[index].title;
+                modifyTaskIndex = index;
               }}
               isPrimary
               padding="0.33rem"
@@ -138,8 +98,7 @@
 />
 <CustomizeModal
   bind:isOpen={isOpenModifyModal}
-  bind:details
-  bind:taskTitle
+  bind:modifyTaskIndex
   type="Modif"
   modalTitle="Modification Task"
   buttonText="Save Task"
