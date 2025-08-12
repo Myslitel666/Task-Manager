@@ -3,44 +3,20 @@ import { browser } from '$app/environment';
 
 const initialTasks = [
     {
-      title: "Выписать 50 новых слов в English Assistant",
+      title: "Example of a task №1",
       details:
-        "Среди них должны быть как специализированные термины, так и разговорные слова.",
+        "The project was created for educational purposes. It is not necessary to enter real data.",
     },
     {
-      title: "Повторить Theory перед собеседованием",
-      details: "Сделать упор на технические термины и устойчивые выражения.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
-        {
-      title: "Выписать 50 новых слов в English Assistant",
+      title: "Example of a task №2",
       details:
-        "Среди них должны быть как специализированные термины, так и разговорные слова.",
+        "The project was created for educational purposes. It is not necessary to enter real data.",
     },
     {
-      title: "Повторить Theory перед собеседованием",
-      details: "Сделать упор на технические термины и устойчивые выражения.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
-        {
-      title: "Выписать 50 новых слов в English Assistant",
+      title: "Example of a task №3",
       details:
-        "Среди них должны быть как специализированные термины, так и разговорные слова.",
-    },
-    {
-      title: "Повторить Theory перед собеседованием",
-      details: "Сделать упор на технические термины и устойчивые выражения.",
-    },
-    {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
-    },
+        "The project was created for educational purposes. It is not necessary to enter real data.",
+    }
 ];
 
 const loadTasks = () => {
