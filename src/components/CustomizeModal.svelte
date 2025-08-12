@@ -1,5 +1,5 @@
 <script>
-  import { Button, Modal, TextArea, TextField } from "svelte-elegant";
+  import { Button, Modal, TextArea, TextField, Message } from "svelte-elegant";
   import { Save, CheckMark } from "svelte-elegant/icons-elegant";
   import { themeStore } from "svelte-elegant/stores/ElementIdStore";
   import {
@@ -17,6 +17,7 @@
   export let modalTitle = "Title";
   export let type = "Creation";
   export let buttonText = "Button Text";
+  export let isVisibleMessage = false;
 
   let theme;
   themeStore.subscribe((value) => {
@@ -25,6 +26,7 @@
 
   $: {
     if (!isOpen) {
+      isVisibleMessage = false;
       clearCashTask();
     }
   }
@@ -36,6 +38,9 @@
   width={type === "Deletion" ? "315px" : "495px"}
 >
   <p class="modal-title">{modalTitle}</p>
+  <Message bind:isVisible={isVisibleMessage} marginTop="-8px"
+    >Fill in the "Task Title" field</Message
+  >
   {#if type !== "Deletion"}
     <div class="text-field">
       <TextField bind:value={$taskTitle} width="100%" label="Task Title" />
@@ -46,9 +51,14 @@
     <Button
       width="100%"
       onclick={() => {
-        if (type === "Modif") updateTask(modifyTaskIndex, $taskTitle, $details);
-        else addTask($taskTitle, $details);
-        isOpen = false;
+        if ($taskTitle) {
+          if (type === "Modif")
+            updateTask(modifyTaskIndex, $taskTitle, $details);
+          else addTask($taskTitle, $details);
+          isOpen = false;
+        } else {
+          isVisibleMessage = true;
+        }
       }}
     >
       {#if type === "Modif"}

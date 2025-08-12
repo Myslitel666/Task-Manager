@@ -10,6 +10,7 @@
   let isOpenModifyModal = false;
   let modifyTaskIndex = -1;
   let theme;
+
   themeStore.subscribe((value) => {
     theme = value;
   });
@@ -38,7 +39,6 @@
                 {task.title}
               </p>
             </div>
-
             <div slot="detailes" style:padding-right="54px">
               <p style:text-indent="19px">{task.details}</p>
             </div>
@@ -73,7 +73,13 @@
         </div>
       {/each}
     {:else}
-      <Box variant="Solid" width="100%" height="85.5px" marginBottom="8px">
+      <Box
+        variant="Solid"
+        width="100%"
+        height="85.5px"
+        marginBottom="8px"
+        color={theme.palette.text.neutral}
+      >
         Your tasks will be displayed here after they are created
       </Box>
     {/if}
