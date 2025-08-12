@@ -18,6 +18,7 @@
   export let type = "Creation";
   export let buttonText = "Button Text";
   export let isVisibleMessage = false;
+  export let messageError = "";
 
   let theme;
   themeStore.subscribe((value) => {
@@ -39,7 +40,7 @@
 >
   <p class="modal-title">{modalTitle}</p>
   <Message bind:isVisible={isVisibleMessage} marginTop="-8px"
-    >Fill in the "Task Title" field</Message
+    >{messageError}</Message
   >
   {#if type !== "Deletion"}
     <div class="text-field">
@@ -52,12 +53,18 @@
       width="100%"
       onclick={() => {
         if ($taskTitle) {
-          if (type === "Modif")
-            updateTask(modifyTaskIndex, $taskTitle, $details);
-          else addTask($taskTitle, $details);
-          isOpen = false;
+          if ($tasks.some((task) => task.title === $taskTitle)) {
+            isVisibleMessage = true;
+            messageError = "There is already a task with that title";
+          } else {
+            if (type === "Modif")
+              updateTask(modifyTaskIndex, $taskTitle, $details);
+            else addTask($taskTitle, $details);
+            isOpen = false;
+          }
         } else {
           isVisibleMessage = true;
+          messageError = 'Fill in the "Task Title" field';
         }
       }}
     >
