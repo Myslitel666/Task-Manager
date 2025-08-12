@@ -69,7 +69,7 @@
         <Button
           width="150px"
           onclick={() => {
-            removeTask();
+            removeTask(modifyTaskIndex);
             isOpen = false;
           }}
         >

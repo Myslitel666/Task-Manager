@@ -61,6 +61,7 @@
             <IconHover
               onclick={() => {
                 isOpenDeletionModal = true;
+                modifyTaskIndex = index;
               }}
               padding="0.33rem"
             >
@@ -86,6 +87,7 @@
 
 <CustomizeModal
   bind:isOpen={isOpenDeletionModal}
+  bind:modifyTaskIndex
   type="Deletion"
   modalTitle="Deletion Task"
   buttonText="Create Task"

@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
 const initialTasks = [
     {
@@ -14,7 +15,7 @@ const initialTasks = [
       title: "Подготовить карточки для тренировки",
       details: "Сгенерировать карточки для запоминания слов и выражений.",
     },
-    {
+        {
       title: "Выписать 50 новых слов в English Assistant",
       details:
         "Среди них должны быть как специализированные термины, так и разговорные слова.",
@@ -27,9 +28,14 @@ const initialTasks = [
       title: "Подготовить карточки для тренировки",
       details: "Сгенерировать карточки для запоминания слов и выражений.",
     },
+        {
+      title: "Выписать 50 новых слов в English Assistant",
+      details:
+        "Среди них должны быть как специализированные термины, так и разговорные слова.",
+    },
     {
-      title: "Подготовить карточки для тренировки",
-      details: "Сгенерировать карточки для запоминания слов и выражений.",
+      title: "Повторить Theory перед собеседованием",
+      details: "Сделать упор на технические термины и устойчивые выражения.",
     },
     {
       title: "Подготовить карточки для тренировки",
@@ -37,19 +43,26 @@ const initialTasks = [
     },
 ];
 
-export const tasks = writable(initialTasks);
+const loadTasks = () => {
+  if (!browser) return initialTasks; // На сервере всегда возвращаем initialTasks
+    const savedTasks = localStorage.getItem('tasks');
+    return savedTasks ? JSON.parse(savedTasks) : initialTasks;
+};
+
+
+export const tasks = writable(loadTasks());
 export const details = writable('');
 export const taskTitle = writable('');
+
+export const clearCashTask = () => {
+    details.set('');
+    taskTitle.set('');
+};
 
 // Добавить в начало (O(1))
 export const addTask = (title, details) => {
   tasks.update(current => [{ title, details }, ...current]);
 };
-
-export const clearCashTask = () => {
-    details.set('');
-    taskTitle.set('');
-}
 
 // Удалить по индексу (O(1))
 export const removeTask = (index) => {
@@ -67,4 +80,12 @@ export const updateTask = (index, title, details) => {
     updated[index] = { title, details };
     return updated;
   });
+};
+
+if (browser) {
+    tasks.subscribe($tasks => {
+        console.log($tasks)
+        const dataToSave = $tasks.map(({ title, details }) => ({ title, details }));
+        localStorage.setItem('tasks', JSON.stringify(dataToSave));
+    });
 };
