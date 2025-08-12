@@ -1,17 +1,11 @@
 <script>
-  import {
-    ToggleContentCard,
-    IconHover,
-    Button,
-    Modal,
-    TextArea,
-    TextField,
-  } from "svelte-elegant";
+  import { ToggleContentCard, IconHover, Button, Modal } from "svelte-elegant";
   import { Delete, Pen, Plus, CheckMark } from "svelte-elegant/icons-elegant";
   import { themeStore } from "svelte-elegant/stores/ElementIdStore";
   import CustomizeModal from "../components/CustomizeModal.svelte";
 
   let isOpenCreationModal = false;
+  let isOpenDeletionModal = false;
   let isOpenModifyModal = false;
   let taskTitle = "";
   let details = "";
@@ -104,7 +98,12 @@
             >
               <Pen size="1.44rem" />
             </IconHover>
-            <IconHover padding="0.33rem">
+            <IconHover
+              onclick={() => {
+                isOpenDeletionModal = true;
+              }}
+              padding="0.33rem"
+            >
               <Delete size="1.58rem" />
             </IconHover>
           </div>
@@ -126,7 +125,14 @@
 </div>
 
 <CustomizeModal
+  bind:isOpen={isOpenDeletionModal}
+  type="Deletion"
+  modalTitle="Deletion Task"
+  buttonText="Create Task"
+/>
+<CustomizeModal
   bind:isOpen={isOpenCreationModal}
+  type="Creation"
   modalTitle="Creation Task"
   buttonText="Create Task"
 />
@@ -134,9 +140,9 @@
   bind:isOpen={isOpenModifyModal}
   bind:details
   bind:taskTitle
+  type="Modif"
   modalTitle="Modification Task"
   buttonText="Save Task"
-  isModify
 />
 
 <style>
