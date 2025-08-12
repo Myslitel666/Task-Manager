@@ -1,5 +1,5 @@
 <script>
-  import { ToggleContentCard, IconHover, Button, Modal } from "svelte-elegant";
+  import { ToggleContentCard, IconHover, Button, Box } from "svelte-elegant";
   import { Delete, Pen, Plus, CheckMark } from "svelte-elegant/icons-elegant";
   import { themeStore } from "svelte-elegant/stores/ElementIdStore";
   import CustomizeModal from "../components/CustomizeModal.svelte";
@@ -26,51 +26,57 @@
     style:overflow="auto"
     style:box-sizing="border-box"
   >
-    {#each $tasks as task, index}
-      <div class="card">
-        <ToggleContentCard width="100%">
-          <div slot="content">
-            <p
-              style:color={theme?.palette.text.neutral}
-              style:transition="color 0.3s"
-            >
-              {task.title}
-            </p>
-          </div>
+    {#if $tasks.length !== 0}
+      {#each $tasks as task, index}
+        <div class="card">
+          <ToggleContentCard width="100%">
+            <div slot="content">
+              <p
+                style:color={theme?.palette.text.neutral}
+                style:transition="color 0.3s"
+              >
+                {task.title}
+              </p>
+            </div>
 
-          <div slot="detailes" style:padding-right="54px">
-            <p style:text-indent="19px">{task.details}</p>
-          </div>
-          <div
-            slot="actions"
-            style:margin-left="0.25rem"
-            style:margin-right="0.25rem"
-          >
-            <IconHover
-              onclick={() => {
-                isOpenModifyModal = true;
-                $details = $tasks[index].details;
-                $taskTitle = $tasks[index].title;
-                modifyTaskIndex = index;
-              }}
-              isPrimary
-              padding="0.33rem"
+            <div slot="detailes" style:padding-right="54px">
+              <p style:text-indent="19px">{task.details}</p>
+            </div>
+            <div
+              slot="actions"
+              style:margin-left="0.25rem"
+              style:margin-right="0.25rem"
             >
-              <Pen size="1.44rem" />
-            </IconHover>
-            <IconHover
-              onclick={() => {
-                isOpenDeletionModal = true;
-                modifyTaskIndex = index;
-              }}
-              padding="0.33rem"
-            >
-              <Delete size="1.58rem" />
-            </IconHover>
-          </div>
-        </ToggleContentCard>
-      </div>
-    {/each}
+              <IconHover
+                onclick={() => {
+                  isOpenModifyModal = true;
+                  $details = $tasks[index].details;
+                  $taskTitle = $tasks[index].title;
+                  modifyTaskIndex = index;
+                }}
+                isPrimary
+                padding="0.33rem"
+              >
+                <Pen size="1.44rem" />
+              </IconHover>
+              <IconHover
+                onclick={() => {
+                  isOpenDeletionModal = true;
+                  modifyTaskIndex = index;
+                }}
+                padding="0.33rem"
+              >
+                <Delete size="1.58rem" />
+              </IconHover>
+            </div>
+          </ToggleContentCard>
+        </div>
+      {/each}
+    {:else}
+      <Box variant="Solid" width="100%" height="85.5px" marginBottom="8px">
+        Your tasks will be displayed here after they are created
+      </Box>
+    {/if}
   </div>
   <Button
     variant="Outlined"
